@@ -1,0 +1,12 @@
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\bin\Debug\net9.0\BuscaPromocao.Domain.deps.json
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\bin\Debug\net9.0\BuscaPromocao.Domain.dll
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\bin\Debug\net9.0\BuscaPromocao.Domain.pdb
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.AssemblyInfoInputs.cache
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.AssemblyInfo.cs
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.csproj.CoreCompileInputs.cache
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.sourcelink.json
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.dll
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\refint\BuscaPromocao.Domain.dll
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\BuscaPromocao.Domain.pdb
+C:\Users\MOSTEN\.gemini\antigravity\scratch\busca-promocoes\src\BuscaPromocao.Domain\obj\Debug\net9.0\ref\BuscaPromocao.Domain.dll
