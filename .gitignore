@@ -1,0 +1,71 @@
+# Visual Studio / .NET
+.vs/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Secrets / Configuration
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+secrets.json
+*.env
+.env
+.env.*
+
+# Node / Angular (Frontend)
+node_modules/
+dist/
+tmp/
+out-tsc/
+bazel-out/
+.angular/
+.npm/
+
+# Development Tools / IDEs
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.~*
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Logs
+*.log
+logs/
+
+# Database / SQLite
+*.db
+*.sqlite
+*.sqlite3
+*.mdf
+*.ldf
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Rider
+.idea/
+*.sln.iml
+
+# Misc
+*.bak
+*.cache
+*.tmp
+*.temp
