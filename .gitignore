@@ -16,6 +16,7 @@ secrets.json
 *.env
 .env
 .env.*
+!.env.example
 
 # Node / Angular (Frontend)
 node_modules/
