@@ -11,6 +11,7 @@
 # Secrets / Configuration
 appsettings.Development.json
 appsettings.*.json
+!appsettings.example.json
 appsettings.json
 secrets.json
 *.env
