@@ -7,7 +7,6 @@ public class PalavraChave : BaseEntity
 {
     public string Termo { get; set; } = string.Empty;
     
-    // Foreign Key
     public Guid UsuarioId { get; set; }
     public Usuario? Usuario { get; set; }
 }

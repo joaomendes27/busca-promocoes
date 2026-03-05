@@ -22,7 +22,6 @@ public class MarcarComoLidaCommandHandlerTests
     [Fact]
     public async Task Deve_Marcar_Notificacao_Como_Lida_E_Retornar_True()
     {
-        // Arrange
         var notificacaoId = Guid.NewGuid();
         var notificacao = new Notificacao
         {
@@ -42,10 +41,8 @@ public class MarcarComoLidaCommandHandlerTests
 
         var command = new MarcarComoLidaCommand(notificacaoId);
 
-        // Act
         var resultado = await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
         resultado.Should().BeTrue();
         notificacao.FoiLida.Should().BeTrue();
         _notificacaoRepoMock.Verify(r => r.Atualizar(notificacao), Times.Once);
@@ -55,7 +52,6 @@ public class MarcarComoLidaCommandHandlerTests
     [Fact]
     public async Task Deve_Retornar_False_Quando_Notificacao_Nao_Existe()
     {
-        // Arrange
         var notificacaoId = Guid.NewGuid();
         _notificacaoRepoMock
             .Setup(r => r.ObterPorIdAsync(notificacaoId, It.IsAny<CancellationToken>()))
@@ -63,10 +59,8 @@ public class MarcarComoLidaCommandHandlerTests
 
         var command = new MarcarComoLidaCommand(notificacaoId);
 
-        // Act
         var resultado = await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
         resultado.Should().BeFalse();
         _notificacaoRepoMock.Verify(r => r.Atualizar(It.IsAny<Notificacao>()), Times.Never);
         _unitOfWorkMock.Verify(u => u.SalvarAlteracoesAsync(It.IsAny<CancellationToken>()), Times.Never);

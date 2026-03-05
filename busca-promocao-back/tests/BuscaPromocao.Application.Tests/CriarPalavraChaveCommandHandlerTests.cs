@@ -22,14 +22,11 @@ public class CriarPalavraChaveCommandHandlerTests
     [Fact]
     public async Task Deve_Criar_PalavraChave_E_Retornar_Id()
     {
-        // Arrange
         var command = new CriarPalavraChaveCommand(Guid.NewGuid(), "Air Fryer");
         _unitOfWorkMock.Setup(u => u.SalvarAlteracoesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-        // Act
         var resultado = await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
         resultado.Should().NotBeEmpty();
         _palavraChaveRepoMock.Verify(r => r.AdicionarAsync(
             It.Is<PalavraChave>(p => p.Termo == "Air Fryer" && p.UsuarioId == command.UsuarioId),
@@ -40,15 +37,12 @@ public class CriarPalavraChaveCommandHandlerTests
     [Fact]
     public async Task Deve_Associar_PalavraChave_Ao_UsuarioId_Correto()
     {
-        // Arrange
         var usuarioId = Guid.NewGuid();
         var command = new CriarPalavraChaveCommand(usuarioId, "Notebook");
         _unitOfWorkMock.Setup(u => u.SalvarAlteracoesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-        // Act
         await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
         _palavraChaveRepoMock.Verify(r => r.AdicionarAsync(
             It.Is<PalavraChave>(p => p.UsuarioId == usuarioId),
             It.IsAny<CancellationToken>()), Times.Once);

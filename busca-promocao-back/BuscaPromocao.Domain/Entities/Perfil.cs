@@ -5,9 +5,8 @@ namespace BuscaPromocao.Domain.Entities;
 
 public class Perfil : BaseEntity
 {
-    public string HandlePerfil { get; set; } = string.Empty; // e.g. "xetdaspromocoes"
+    public string HandlePerfil { get; set; } = string.Empty;
     
-    // Foreign Key
     public Guid UsuarioId { get; set; }
     public Usuario? Usuario { get; set; }
 }

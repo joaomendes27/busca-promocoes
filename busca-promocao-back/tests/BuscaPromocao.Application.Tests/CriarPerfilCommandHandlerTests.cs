@@ -22,14 +22,11 @@ public class CriarPerfilCommandHandlerTests
     [Fact]
     public async Task Deve_Criar_Perfil_E_Retornar_Id()
     {
-        // Arrange
         var command = new CriarPerfilCommand(Guid.NewGuid(), "xetdaspromocoes");
         _unitOfWorkMock.Setup(u => u.SalvarAlteracoesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-        // Act
         var resultado = await _handler.Handle(command, CancellationToken.None);
 
-        // Assert
         resultado.Should().NotBeEmpty();
         _perfilRepoMock.Verify(r => r.AdicionarAsync(
             It.Is<Perfil>(p => p.HandlePerfil == "xetdaspromocoes" && p.UsuarioId == command.UsuarioId),

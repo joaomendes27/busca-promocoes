@@ -12,7 +12,6 @@ public class Notificacao : BaseEntity
     public DateTime PostadoEm { get; set; }
     public bool FoiLida { get; set; } = false;
 
-    // Foreign Key
     public Guid UsuarioId { get; set; }
     public Usuario? Usuario { get; set; }
 }

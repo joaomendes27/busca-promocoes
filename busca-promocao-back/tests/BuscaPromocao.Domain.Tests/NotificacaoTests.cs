@@ -8,7 +8,6 @@ public class NotificacaoTests
     [Fact]
     public void Deve_Criar_Notificacao_Com_Valores_Padrao()
     {
-        // Arrange & Act
         var notificacao = new Notificacao
         {
             Id = Guid.NewGuid(),
@@ -20,7 +19,6 @@ public class NotificacaoTests
             UsuarioId = Guid.NewGuid()
         };
 
-        // Assert
         notificacao.FoiLida.Should().BeFalse();
         notificacao.Titulo.Should().Be("Promoção encontrada!");
         notificacao.Conteudo.Should().Contain("Air Fryer");
@@ -31,13 +29,10 @@ public class NotificacaoTests
     [Fact]
     public void Deve_Marcar_Notificacao_Como_Lida()
     {
-        // Arrange
         var notificacao = new Notificacao { Id = Guid.NewGuid(), Titulo = "Teste", Conteudo = "Teste" };
 
-        // Act
         notificacao.FoiLida = true;
 
-        // Assert
         notificacao.FoiLida.Should().BeTrue();
     }
 }
