@@ -5,5 +5,5 @@ namespace BuscaPromocao.Domain.Interfaces;
 
 public interface IUnitOfWork
 {
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<int> SalvarAlteracoesAsync(CancellationToken cancellationToken = default);
 }

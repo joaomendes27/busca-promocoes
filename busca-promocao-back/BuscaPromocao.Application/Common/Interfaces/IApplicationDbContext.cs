@@ -7,10 +7,10 @@ namespace BuscaPromocao.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<User> Users { get; }
-    DbSet<Keyword> Keywords { get; }
-    DbSet<Profile> Profiles { get; }
-    DbSet<InAppNotification> Notifications { get; }
+    DbSet<Usuario> Usuarios { get; }
+    DbSet<PalavraChave> PalavrasChave { get; }
+    DbSet<Perfil> Perfis { get; }
+    DbSet<Notificacao> Notificacoes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
