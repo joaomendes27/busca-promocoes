@@ -3,8 +3,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using BuscaPromocao.Application.Features.PalavrasChave.Commands.CriarPalavraChave;
-using BuscaPromocao.Application.Features.PalavrasChave.Queries.ObterPalavrasChavePorUsuario;
+using BuscaPromocao.Application.Features.Produtos.Commands.CriarProduto;
+using BuscaPromocao.Application.Features.Produtos.Queries.ObterProdutosPorUsuario;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +37,7 @@ public sealed class WishlistController : ControllerBase
     {
         try
         {
-            var query = new ObterPalavrasChavePorUsuarioQuery(LerUsuarioAutenticado());
+            var query = new ObterProdutosPorUsuarioQuery(LerUsuarioAutenticado());
             var resultado = await _mediator.Send(query, cancellationToken);
             return Ok(resultado);
         }
@@ -52,7 +52,7 @@ public sealed class WishlistController : ControllerBase
     {
         try
         {
-            var command = new CriarPalavraChaveCommand(LerUsuarioAutenticado(), request.NomeProduto);
+            var command = new CriarProdutoCommand(LerUsuarioAutenticado(), request.NomeProduto);
             var result = await _mediator.Send(command, cancellationToken);
             return StatusCode(201, new { Id = result, Mensagem = "Produto adicionado à sua wishlist com sucesso." });
         }

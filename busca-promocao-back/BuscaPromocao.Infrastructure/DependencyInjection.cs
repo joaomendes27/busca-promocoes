@@ -17,7 +17,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-        services.AddScoped<IPalavraChaveRepository, PalavraChaveRepository>();
+        services.AddScoped<IProdutoRepository, ProdutoRepository>();
         services.AddScoped<IPerfilRepository, PerfilRepository>();
         services.AddScoped<INotificacaoRepository, NotificacaoRepository>();
 

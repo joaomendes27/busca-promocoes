@@ -12,7 +12,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     public DbSet<Usuario> Usuarios => Set<Usuario>();
-    public DbSet<PalavraChave> PalavrasChave => Set<PalavraChave>();
+    public DbSet<Produto> Produtos => Set<Produto>();
     public DbSet<Perfil> Perfis => Set<Perfil>();
     public DbSet<Notificacao> Notificacoes => Set<Notificacao>();
 
@@ -34,19 +34,19 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.HasIndex(e => e.Email).IsUnique();
         });
 
-        modelBuilder.Entity<PalavraChave>(entity =>
+        modelBuilder.Entity<Produto>(entity =>
         {
-            entity.ToTable("palavra_chave");
+            entity.ToTable("produto");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt).HasColumnName("criado_em");
             entity.Property(e => e.UpdatedAt).HasColumnName("atualizado_em");
 
-            entity.Property(e => e.Termo).HasColumnName("termo").IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Nome).HasColumnName("nome").IsRequired().HasMaxLength(100);
             entity.Property(e => e.UsuarioId).HasColumnName("usuario_id");
             
             entity.HasOne(e => e.Usuario)
-                .WithMany(u => u.PalavrasChave)
+                .WithMany(u => u.Produtos)
                 .HasForeignKey(e => e.UsuarioId)
                 .OnDelete(DeleteBehavior.Cascade);
         });

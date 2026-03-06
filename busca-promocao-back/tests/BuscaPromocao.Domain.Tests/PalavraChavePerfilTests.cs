@@ -4,37 +4,37 @@ using FluentAssertions;
 
 namespace BuscaPromocao.Domain.Tests.Entities;
 
-public class PalavraChaveTests
+public class ProdutoTests
 {
     [Fact]
-    public void Deve_Criar_PalavraChave_Com_Valores_Padrao()
+    public void Deve_Criar_Produto_Com_Valores_Padrao()
     {
-        var palavraChave = new PalavraChave();
+        var produto = new Produto();
 
-        palavraChave.Termo.Should().BeEmpty();
-        palavraChave.UsuarioId.Should().Be(Guid.Empty);
-        palavraChave.Usuario.Should().BeNull();
+        produto.Nome.Should().BeEmpty();
+        produto.UsuarioId.Should().Be(Guid.Empty);
+        produto.Usuario.Should().BeNull();
     }
 
     [Fact]
-    public void Deve_Atribuir_Termo_Corretamente()
+    public void Deve_Atribuir_Nome_Corretamente()
     {
-        var palavraChave = new PalavraChave { Termo = "Air Fryer" };
+        var produto = new Produto { Nome = "Air Fryer" };
 
-        palavraChave.Termo.Should().Be("Air Fryer");
+        produto.Nome.Should().Be("Air Fryer");
     }
 
     [Fact]
     public void Deve_Associar_Ao_Usuario()
     {
         var usuarioId = Guid.NewGuid();
-        var palavraChave = new PalavraChave
+        var produto = new Produto
         {
-            Termo = "Notebook",
+            Nome = "Notebook",
             UsuarioId = usuarioId
         };
 
-        palavraChave.UsuarioId.Should().Be(usuarioId);
+        produto.UsuarioId.Should().Be(usuarioId);
     }
 }
 

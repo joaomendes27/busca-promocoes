@@ -138,22 +138,22 @@ public sealed class CrawlerWorker : BackgroundService
 
             foreach (var usuarioId in usuariosComEstePerfil)
             {
-                var palavrasChave = await dbContext.Set<BuscaPromocao.Domain.Entities.PalavraChave>()
+                var produtos = await dbContext.Set<BuscaPromocao.Domain.Entities.Produto>()
                     .Where(pc => pc.UsuarioId == usuarioId)
                     .ToListAsync(cancellationToken);
 
-                foreach (var palavra in palavrasChave)
+                foreach (var produto in produtos)
                 {
-                    if (titulo.Contains(palavra.Termo, StringComparison.InvariantCultureIgnoreCase))
+                    if (titulo.Contains(produto.Nome, StringComparison.InvariantCultureIgnoreCase))
                     {
                         _logger.LogInformation(
                             "Promoção encontrada! Perfil: {Handle}, Produto: {Produto}, Tweet: {Link}",
-                            handle, palavra.Termo, link);
+                            handle, produto.Nome, link);
 
                         await _publishEndpoint.Publish(new PromocaoEncontradaEvento(
                             UsuarioId: usuarioId,
                             HandlePerfil: handle,
-                            Produto: palavra.Termo,
+                            Produto: produto.Nome,
                             TextoTweet: titulo,
                             UrlTweet: link,
                             PostadoEm: pubDate.ToUniversalTime()

@@ -29,21 +29,21 @@ public class UsuarioTests
     {
         var usuario = new Usuario();
 
-        usuario.PalavrasChave.Should().NotBeNull().And.BeEmpty();
+        usuario.Produtos.Should().NotBeNull().And.BeEmpty();
         usuario.Perfis.Should().NotBeNull().And.BeEmpty();
         usuario.Notificacoes.Should().NotBeNull().And.BeEmpty();
     }
 
     [Fact]
-    public void Deve_Adicionar_PalavraChave_Ao_Usuario()
+    public void Deve_Adicionar_Produto_Ao_Usuario()
     {
         var usuario = new Usuario { Id = Guid.NewGuid(), Nome = "Teste", Email = "teste@email.com" };
-        var palavraChave = new PalavraChave { Id = Guid.NewGuid(), Termo = "Air Fryer", UsuarioId = usuario.Id };
+        var produto = new Produto { Id = Guid.NewGuid(), Nome = "Air Fryer", UsuarioId = usuario.Id };
 
-        usuario.PalavrasChave.Add(palavraChave);
+        usuario.Produtos.Add(produto);
 
-        usuario.PalavrasChave.Should().HaveCount(1);
-        usuario.PalavrasChave.First().Termo.Should().Be("Air Fryer");
+        usuario.Produtos.Should().HaveCount(1);
+        usuario.Produtos.First().Nome.Should().Be("Air Fryer");
     }
 
     [Fact]

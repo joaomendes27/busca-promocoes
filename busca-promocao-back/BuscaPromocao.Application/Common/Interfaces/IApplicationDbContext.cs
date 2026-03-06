@@ -8,7 +8,7 @@ namespace BuscaPromocao.Application.Common.Interfaces;
 public interface IApplicationDbContext
 {
     DbSet<Usuario> Usuarios { get; }
-    DbSet<PalavraChave> PalavrasChave { get; }
+    DbSet<Produto> Produtos { get; }
     DbSet<Perfil> Perfis { get; }
     DbSet<Notificacao> Notificacoes { get; }
 
