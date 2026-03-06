@@ -69,6 +69,7 @@ docker-compose.override.yml
 # AI Agent Skills / Config
 .agents/
 .gemini/
+nitter.conf
 
 # Misc
 *.bak
