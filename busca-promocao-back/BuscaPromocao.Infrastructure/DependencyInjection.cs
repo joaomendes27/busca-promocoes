@@ -23,6 +23,8 @@ public static class DependencyInjection
 
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IJwtProvider, JwtProvider>();
+        
+        services.AddHttpClient<BuscaPromocao.Application.Interfaces.IScraperService, BuscaPromocao.Infrastructure.Services.NitterScraperService>();
 
         return services;
     }
