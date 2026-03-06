@@ -66,6 +66,10 @@ docker-compose.override.yml
 .idea/
 *.sln.iml
 
+# AI Agent Skills / Config
+.agents/
+.gemini/
+
 # Misc
 *.bak
 *.cache
