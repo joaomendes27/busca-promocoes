@@ -152,6 +152,13 @@ public class PalavraChaveConfiguration : IEntityTypeConfiguration<PalavraChave>
 }
 ```
 
+### 7. Padrões de Commit
+
+- Os **títulos dos commits** devem ser **autoexplicativos** e sempre em **português**
+- Utilize o padrão Conventional Commits (ex: `feat:`, `fix:`, `refactor:`, `chore:`)
+- **Exemplo correto:** `feat(auth): implementa autenticação JWT completa com endpoints de login e registro`
+- **Exemplo incorreto:** `fixed stuff` ou `add jwt`
+
 ---
 
 ## Checklist Antes de Submeter Código
