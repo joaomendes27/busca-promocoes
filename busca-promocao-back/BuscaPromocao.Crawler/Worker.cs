@@ -147,13 +147,13 @@ public sealed class CrawlerWorker : BackgroundService
                     if (titulo.Contains(palavra.Termo, StringComparison.InvariantCultureIgnoreCase))
                     {
                         _logger.LogInformation(
-                            "Promoção encontrada! Perfil: {Handle}, Termo: {Termo}, Tweet: {Link}",
+                            "Promoção encontrada! Perfil: {Handle}, Produto: {Produto}, Tweet: {Link}",
                             handle, palavra.Termo, link);
 
                         await _publishEndpoint.Publish(new PromocaoEncontradaEvento(
                             UsuarioId: usuarioId,
                             HandlePerfil: handle,
-                            Termo: palavra.Termo,
+                            Produto: palavra.Termo,
                             TextoTweet: titulo,
                             UrlTweet: link,
                             PostadoEm: pubDate.ToUniversalTime()

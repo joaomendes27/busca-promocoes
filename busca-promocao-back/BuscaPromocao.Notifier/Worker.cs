@@ -34,7 +34,7 @@ public sealed class PromocaoEncontradaConsumer : IConsumer<PromocaoEncontradaEve
 
         _logger.LogInformation(
             "Notificação recebida: Perfil={Handle}, Termo={Termo}, Tweet={Url}",
-            evento.HandlePerfil, evento.Termo, evento.UrlTweet);
+            evento.HandlePerfil, evento.Produto, evento.UrlTweet);
 
         await SalvarNotificacaoNoBancoAsync(evento);
         await EnviarEmailAsync(evento);
@@ -45,7 +45,7 @@ public sealed class PromocaoEncontradaConsumer : IConsumer<PromocaoEncontradaEve
         var notificacao = new Notificacao
         {
             Id = Guid.NewGuid(),
-            Titulo = $"Promoção de {evento.Termo} encontrada!",
+            Titulo = $"Promoção de {evento.Produto} encontrada!",
             Conteudo = evento.TextoTweet,
             UrlTweet = evento.UrlTweet,
             HandlePerfil = evento.HandlePerfil,
@@ -89,13 +89,13 @@ public sealed class PromocaoEncontradaConsumer : IConsumer<PromocaoEncontradaEve
             var mensagem = new MimeMessage();
             mensagem.From.Add(new MailboxAddress(remetenteNome, remetenteEmail));
             mensagem.To.Add(new MailboxAddress(usuario.Nome, usuario.Email));
-            mensagem.Subject = $"🔥 Promoção encontrada: {evento.Termo}";
+            mensagem.Subject = $"🔥 Promoção encontrada: {evento.Produto}";
 
             mensagem.Body = new TextPart("html")
             {
                 Text = $@"
                     <h2>Promoção encontrada!</h2>
-                    <p><strong>Produto:</strong> {evento.Termo}</p>
+                    <p><strong>Produto:</strong> {evento.Produto}</p>
                     <p><strong>Perfil:</strong> @{evento.HandlePerfil}</p>
                     <p><strong>Tweet:</strong> {evento.TextoTweet}</p>
                     <p><a href='{evento.UrlTweet}'>Ver tweet original</a></p>
@@ -109,7 +109,7 @@ public sealed class PromocaoEncontradaConsumer : IConsumer<PromocaoEncontradaEve
             await client.SendAsync(mensagem);
             await client.DisconnectAsync(true);
 
-            _logger.LogInformation("Email enviado para {Email} sobre promoção de {Termo}.", usuario.Email, evento.Termo);
+            _logger.LogInformation("Email enviado para {Email} sobre promoção de {Produto}.", usuario.Email, evento.Produto);
         }
         catch (Exception ex)
         {
