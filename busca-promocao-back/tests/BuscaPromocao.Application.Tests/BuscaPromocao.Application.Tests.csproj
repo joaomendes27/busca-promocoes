@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BuscaPromocao.Application\BuscaPromocao.Application.csproj" />
     <ProjectReference Include="..\..\BuscaPromocao.Domain\BuscaPromocao.Domain.csproj" />
+    <ProjectReference Include="..\..\BuscaPromocao.Infrastructure\BuscaPromocao.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
