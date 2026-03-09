@@ -1,0 +1,46 @@
+<div class="header-section">
+  <h2>Radar Central</h2>
+  <p class="text-muted">Resumo da sua atividade de buscas.</p>
+</div>
+
+<div class="dashboard-grid mt-4">
+  <div class="card stat-card">
+    <h3>Alertas Não Lidos</h3>
+    <div class="stat-value text-danger" *ngIf="notificacoes()">{{ notificacoes().length }}</div>
+    <div class="stat-value" *ngIf="!notificacoes()">0</div>
+  </div>
+
+  <div class="card stat-card">
+    <h3>Produtos Cadastrados</h3>
+    <div class="stat-value text-accent">{{ totalProdutos() }}</div>
+  </div>
+
+  <div class="card stat-card">
+    <h3>Perfis Monitorados</h3>
+    <div class="stat-value text-accent">{{ totalPerfis() }}</div>
+  </div>
+
+  <div class="card stat-card">
+    <h3>Promoções encontradas no último mês</h3>
+    <div class="stat-value text-accent">{{ totalPromocoes() }}</div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Últimas Descobertas</h3>
+  <div *ngIf="!notificacoes()?.length" class="empty-state">
+    <p>Nenhuma promoção nova encontrada.</p>
+  </div>
+  
+  <div class="feed mt-2" *ngIf="notificacoes()?.length">
+    <div class="feed-item" *ngFor="let notif of notificacoes() | slice:0:5">
+      <div class="feed-header">
+        <span class="badge new" *ngIf="!notif.foiLida">Novo</span>
+        <span class="time">{{ notif.postadoEm | date:'short' }}</span>
+      </div>
+      <h4>{{ notif.titulo }}</h4>
+      <p class="text-muted">{{ notif.conteudo }}</p>
+      <a [href]="notif.urlTweet" target="_blank" class="link-out">Ver Tweet ↗</a>
+    </div>
+  </div>
+</div>

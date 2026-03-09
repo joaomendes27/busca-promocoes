@@ -8,8 +8,9 @@ namespace BuscaPromocao.Domain.Interfaces;
 
 public interface INotificacaoRepository
 {
-    Task<IEnumerable<Notificacao>> ObterNaoLidasPorUsuarioIdAsync(Guid usuarioId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Notificacao>> ObterNaoLidasPorUsuarioIdAsync(Guid usuarioId, int? dias = null, string? produto = null, CancellationToken cancellationToken = default);
     Task<Notificacao?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task AdicionarAsync(Notificacao notificacao, CancellationToken cancellationToken = default);
     void Atualizar(Notificacao notificacao);
+    void Remover(Notificacao notificacao);
 }

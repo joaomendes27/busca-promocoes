@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using BuscaPromocao.Application.Features.Perfis.Commands.CriarPerfil;
+using BuscaPromocao.Application.Features.Perfis.Commands.RemoverPerfil;
 using BuscaPromocao.Application.Features.Perfis.Queries.ObterPerfisPorUsuario;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +56,21 @@ public sealed class PerfisController : ControllerBase
             var command = new CriarPerfilCommand(LerUsuarioAutenticado(), request.HandlePerfil);
             var result = await _mediator.Send(command, cancellationToken);
             return StatusCode(201, new { Id = result, Mensagem = "Perfil de promoções adicionado para monitoramento." });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Erro = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> RemoverPerfilMonitorado(Guid id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var command = new RemoverPerfilCommand(id, LerUsuarioAutenticado());
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
         }
         catch (Exception ex)
         {

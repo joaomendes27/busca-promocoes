@@ -18,7 +18,7 @@ public class ObterNotificacoesNaoLidasQueryHandler : IRequestHandler<ObterNotifi
 
     public async Task<IEnumerable<NotificacaoDto>> Handle(ObterNotificacoesNaoLidasQuery request, CancellationToken cancellationToken)
     {
-        var notificacoes = await _notificacaoRepository.ObterNaoLidasPorUsuarioIdAsync(request.UsuarioId, cancellationToken);
+        var notificacoes = await _notificacaoRepository.ObterNaoLidasPorUsuarioIdAsync(request.UsuarioId, request.Dias, request.Produto, cancellationToken);
         
         return notificacoes.Select(n => new NotificacaoDto(
             n.Id, 

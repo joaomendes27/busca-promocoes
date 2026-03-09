@@ -41,10 +41,10 @@ public class ObterNotificacoesNaoLidasQueryHandlerTests
             }
         };
 
-        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<CancellationToken>()))
+        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(notificacoes);
 
-        var resultado = await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId), CancellationToken.None);
+        var resultado = await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId, null, null), CancellationToken.None);
 
         resultado.Should().HaveCount(1);
         resultado.First().Titulo.Should().Contain("Air Fryer");
@@ -54,10 +54,10 @@ public class ObterNotificacoesNaoLidasQueryHandlerTests
     public async Task Handle_SemNotificacoes_DeveRetornarListaVazia()
     {
         var usuarioId = Guid.NewGuid();
-        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<CancellationToken>()))
+        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new List<Notificacao>());
 
-        var resultado = await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId), CancellationToken.None);
+        var resultado = await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId, null, null), CancellationToken.None);
 
         resultado.Should().BeEmpty();
     }
@@ -83,10 +83,10 @@ public class ObterNotificacoesNaoLidasQueryHandlerTests
             }
         };
 
-        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<CancellationToken>()))
+        _repoMock.Setup(r => r.ObterNaoLidasPorUsuarioIdAsync(usuarioId, It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(notificacoes);
 
-        var resultado = (await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId), CancellationToken.None)).ToList();
+        var resultado = (await _handler.Handle(new ObterNotificacoesNaoLidasQuery(usuarioId, null, null), CancellationToken.None)).ToList();
 
         resultado.First().Id.Should().Be(id);
         resultado.First().Titulo.Should().Be("Promoção de Notebook!");

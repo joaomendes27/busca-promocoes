@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using BuscaPromocao.Application.Features.Produtos.Commands.CriarProduto;
+using BuscaPromocao.Application.Features.Produtos.Commands.RemoverProduto;
 using BuscaPromocao.Application.Features.Produtos.Queries.ObterProdutosPorUsuario;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +56,21 @@ public sealed class WishlistController : ControllerBase
             var command = new CriarProdutoCommand(LerUsuarioAutenticado(), request.NomeProduto);
             var result = await _mediator.Send(command, cancellationToken);
             return StatusCode(201, new { Id = result, Mensagem = "Produto adicionado à sua wishlist com sucesso." });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Erro = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> RemoverProdutoWishlist(Guid id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var command = new RemoverProdutoCommand(id, LerUsuarioAutenticado());
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
         }
         catch (Exception ex)
         {

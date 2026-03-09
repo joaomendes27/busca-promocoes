@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
@@ -64,7 +65,17 @@ public sealed class NitterScraperService : IScraperService
                             var title = item.Element("title")?.Value ?? string.Empty;
                             var link = item.Element("link")?.Value ?? string.Empty;
 
-                            bool hasKeyword = palavrasChave.Any(p => title.Contains(p, StringComparison.InvariantCultureIgnoreCase));
+                            bool hasKeyword = palavrasChave.Any(p => 
+                            {
+                                var termoBase = p.EndsWith("s", StringComparison.OrdinalIgnoreCase) && p.Length > 3 
+                                    ? p.Substring(0, p.Length - 1) 
+                                    : p;
+                                    
+                                return CultureInfo.InvariantCulture.CompareInfo.IndexOf(
+                                    title, 
+                                    termoBase, 
+                                    CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreCase) >= 0;
+                            });
                             
                             if (hasKeyword)
                             {

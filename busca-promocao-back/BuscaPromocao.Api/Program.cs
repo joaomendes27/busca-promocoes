@@ -31,6 +31,16 @@ builder.Services.AddAuthorization();
 BuscaPromocao.Infrastructure.DependencyInjection.AddInfrastructureServices(builder.Services, builder.Configuration);
 BuscaPromocao.Application.DependencyInjection.AddApplicationServices(builder.Services);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -85,6 +95,8 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
+
+app.UseCors("DevPolicy");
 
 app.UseHttpsRedirection();
 

@@ -28,16 +28,32 @@ public sealed class NotificacaoRepository : INotificacaoRepository
         _dbContext.Set<Notificacao>().Update(notificacao);
     }
 
-    public async Task<IEnumerable<Notificacao>> ObterNaoLidasPorUsuarioIdAsync(Guid usuarioId, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Notificacao>> ObterNaoLidasPorUsuarioIdAsync(Guid usuarioId, int? dias = null, string? produto = null, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Set<Notificacao>()
-            .Where(n => n.UsuarioId == usuarioId && !n.FoiLida)
-            .OrderByDescending(n => n.CreatedAt)
-            .ToListAsync(cancellationToken);
+        var query = _dbContext.Set<Notificacao>().Where(n => n.UsuarioId == usuarioId && !n.FoiLida);
+
+        if (dias.HasValue)
+        {
+            var dataCorte = DateTime.UtcNow.AddDays(-dias.Value);
+            query = query.Where(n => n.PostadoEm >= dataCorte);
+        }
+
+        if (!string.IsNullOrWhiteSpace(produto))
+        {
+            var pUpper = produto.ToUpper();
+            query = query.Where(n => n.Titulo.ToUpper().Contains(pUpper) || n.Conteudo.ToUpper().Contains(pUpper));
+        }
+
+        return await query.OrderByDescending(n => n.CreatedAt).ToListAsync(cancellationToken);
     }
 
     public async Task<Notificacao?> ObterPorIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _dbContext.Set<Notificacao>().FindAsync([id], cancellationToken);
+    }
+
+    public void Remover(Notificacao notificacao)
+    {
+        _dbContext.Set<Notificacao>().Remove(notificacao);
     }
 }

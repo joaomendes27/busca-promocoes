@@ -1,0 +1,36 @@
+<div class="header-section">
+  <h2>Wishlist de Produtos</h2>
+  <p class="text-muted">Palavras-chave dos produtos que você deseja comprar (ex: "Air Fryer", "RTX 4060").</p>
+</div>
+
+<div class="adder-box mt-4">
+  <form (ngSubmit)="adicionarProduto()" #form="ngForm" class="flex-row">
+    <input type="text" name="nome" [(ngModel)]="novoProduto" required placeholder="O que você está procurando?">
+    <button class="btn-primary" type="submit" [disabled]="!novoProduto">ADICIONAR</button>
+  </form>
+</div>
+
+<div class="list-container mt-4">
+  <div *ngIf="produtos().length === 0" class="empty-state">
+    Sua wishlist está vazia.
+  </div>
+  
+  <div class="list-item" *ngFor="let item of produtos()">
+    <ng-container *ngIf="idEmExclusao() !== item.id">
+      <div class="item-info">
+        <span class="item-name">{{ item.nome }}</span>
+      </div>
+      <button class="btn-remove" (click)="iniciarExclusao(item.id)" title="Remover da Wishlist">Remover</button>
+    </ng-container>
+
+    <ng-container *ngIf="idEmExclusao() === item.id">
+      <div class="item-info">
+        <span class="item-name text-muted">Excluir "{{ item.nome }}"?</span>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn-cancel" (click)="cancelarExclusao()">Cancelar</button>
+        <button class="btn-confirm-danger" (click)="confirmarExclusao(item.id)">Sim, Excluir</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

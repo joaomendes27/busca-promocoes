@@ -1,0 +1,57 @@
+<div class="layout-wrapper">
+  <!-- Mobile Backdrop -->
+  <div class="sidebar-backdrop" *ngIf="menuAberto()" (click)="toggleMenu()"></div>
+
+  <aside class="sidebar" [class.open]="menuAberto()">
+    <div class="sidebar-header">
+      <img src="assets/logo-transparent.svg" alt="Busca Promoção Logo" class="brand-logo" />
+      <h1 class="logo">Busca <span class="text-accent">Promoção</span></h1>
+      <div class="logo-sub">Radar de alertas</div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" (click)="fecharMenuMobile()">
+        <span class="icon">⊞</span> Dashboard
+      </a>
+      <a routerLink="/notificacoes" routerLinkActive="active" class="nav-item" (click)="fecharMenuMobile()">
+        <span class="icon">🔔</span> Alertas
+      </a>
+      <a routerLink="/produtos" routerLinkActive="active" class="nav-item" (click)="fecharMenuMobile()">
+        <span class="icon">★</span> Wishlist
+      </a>
+      <a routerLink="/promocoes" routerLinkActive="active" class="nav-item" (click)="fecharMenuMobile()">
+        <span class="icon">🏷️</span> Busca Imediata
+      </a>
+      <a routerLink="/perfis" routerLinkActive="active" class="nav-item" (click)="fecharMenuMobile()">
+        <span class="icon">&#64;</span> Perfis X
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info" *ngIf="authService.currentUser() as user">
+        <div class="user-name">{{ user.nome }}</div>
+        <div class="user-email">{{ user.email }}</div>
+      </div>
+      <button class="btn-logout" (click)="sair()">
+        <span class="icon">⎋</span> Sair da Conta
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn-hamburger" (click)="toggleMenu()" title="Abrir Menu">
+          ☰
+        </button>
+        <span class="ghost"></span>
+      </div>
+      <button class="mobile-logout" (click)="sair()" title="Sair da Conta">
+        <span class="icon" style="color: var(--color-danger); font-size: 1.5rem;">⎋</span>
+      </button>
+    </header>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

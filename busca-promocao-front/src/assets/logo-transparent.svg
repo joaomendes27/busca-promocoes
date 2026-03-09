@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Outer sharp brutalist brackets -->
+  <path d="M20 10 L10 10 L10 20 M80 10 L90 10 L90 20 M90 80 L90 90 L80 90 M20 90 L10 90 L10 80" stroke="#CDFA4C" stroke-width="8" stroke-linejoin="miter"/>
+  <!-- Target circles -->
+  <circle cx="50" cy="50" r="28" stroke="#CDFA4C" stroke-width="6" />
+  <!-- Center dot -->
+  <circle cx="50" cy="50" r="8" fill="#CDFA4C" />
+  <!-- Crosshairs -->
+  <path d="M50 10 L50 35 M50 65 L50 90 M10 50 L35 50 M65 50 L90 50" stroke="#CDFA4C" stroke-width="6" />
+</svg>

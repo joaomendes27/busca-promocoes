@@ -1,0 +1,65 @@
+<div class="header-section">
+  <h2>Busca Imediata</h2>
+  <p class="text-muted">Acione o radar agora mesmo para buscar promoções imediatamente no período escolhido.</p>
+</div>
+
+<div class="filters-card mt-4">
+  <div class="filter-actions horizontal-group">
+    <div class="filter-group">
+      <label for="produtoFiltro" style="margin-right: 8px;">Produto:</label>
+      <select id="produtoFiltro" [(ngModel)]="produtoSelecionado" class="dark-dropdown">
+        <option value="Tudo">Todos da Wishlist</option>
+        <option *ngFor="let prod of produtosWishlist()" [value]="prod.nome">{{prod.nome}}</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="diasFiltro" style="margin-right: 8px;">Período:</label>
+      <select id="diasFiltro" [(ngModel)]="diasSelecionados" class="dark-dropdown">
+        <option [ngValue]="7">Últimos 7 dias</option>
+        <option [ngValue]="15">Últimos 15 dias</option>
+        <option [ngValue]="30">Últimos 30 dias</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary action-btn" (click)="buscarImediato()" [disabled]="loading() || produtosWishlist().length === 0">
+      <span *ngIf="!loading()">🔍 Buscar</span>
+      <span *ngIf="loading()">📡 Escaneando...</span>
+    </button>
+  </div>
+</div>
+
+<div class="mt-4">
+  <div *ngIf="loading()" class="loading-state">
+    <div class="spinner"></div>
+    <p class="mt-2 text-muted">Acessando o Nitter remotamente, capturando RSS e validando RegEx. Pode levar alguns segundos...</p>
+  </div>
+
+  <div *ngIf="!loading() && buscou && promocoes().length === 0" class="empty-state">
+    <p>Nenhuma oferta encontrada para os itens selecionados no radar dos últimos {{diasSelecionados}} dias.</p>
+  </div>
+
+  <div class="feed" *ngIf="!loading() && promocoes().length > 0">
+    <details class="feed-item" *ngFor="let promo of promocoes()">
+      <summary class="feed-header">
+        <div class="title-group">
+          <span class="badge profile">&#64;{{ promo.perfilOrigem }}</span>
+          <h4>{{ promo.nomeProduto }}</h4>
+        </div>
+        <span class="time">{{ promo.encontradaEm | date:'short' }}</span>
+      </summary>
+      
+      <div class="feed-content">
+        <p class="context">"{{ promo.tituloContexto }}"</p>
+        
+        <div class="price-tag" *ngIf="promo.precoEncontrado">
+          💰 {{ promo.precoEncontrado | currency:'BRL' }}
+        </div>
+        
+        <a [href]="promo.urlReferencia" target="_blank" class="btn btn-primary mt-2">
+          Acessar Oferta Externa ↗
+        </a>
+      </div>
+    </details>
+  </div>
+</div>

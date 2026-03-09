@@ -12,4 +12,4 @@ public record NotificacaoDto(
     string HandlePerfil, 
     DateTime PostadoEm);
 
-public record ObterNotificacoesNaoLidasQuery(Guid UsuarioId) : IRequest<IEnumerable<NotificacaoDto>>;
+public record ObterNotificacoesNaoLidasQuery(Guid UsuarioId, int? Dias, string? Produto) : IRequest<IEnumerable<NotificacaoDto>>;

@@ -1,0 +1,32 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <h1 class="logo display-font">Busca <span class="text-accent">Promoção</span></h1>
+    <p class="subtitle">Inscreva-se para começar a monitorar.</p>
+
+    <form (ngSubmit)="onSubmit()" #regForm="ngForm" class="auth-form">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" name="nome" [(ngModel)]="dados.nome" required placeholder="Seu nome">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" name="email" [(ngModel)]="dados.email" required placeholder="seu&#64;email.com">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" name="senha" [(ngModel)]="dados.senha" required placeholder="••••••••">
+      </div>
+
+      <div class="error-msg" *ngIf="erro()">{{ erro() }}</div>
+      <div class="success-msg" *ngIf="sucesso()">{{ sucesso() }}</div>
+
+      <button type="submit" class="btn-primary w-100" [disabled]="!regForm.form.valid || loading()">
+        {{ loading() ? 'Registrando...' : 'CRIAR CONTA' }} 
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      Já tem conta? <a routerLink="/login">Faça login</a>
+    </div>
+  </div>
+</div>

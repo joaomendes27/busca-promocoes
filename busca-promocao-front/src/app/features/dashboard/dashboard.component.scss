@@ -1,0 +1,71 @@
+.mt-4 { margin-top: 2rem; }
+.mt-2 { margin-top: 1rem; }
+
+.header-section h2 { font-size: 2.5rem; }
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  border: 1px dashed var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feed-item {
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  padding: 1.5rem;
+  border-radius: 4px;
+  transition: transform 0.2s;
+}
+
+.feed-item:hover {
+  transform: translateX(5px);
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.time {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.link-out {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}

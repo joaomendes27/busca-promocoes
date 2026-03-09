@@ -1,0 +1,62 @@
+<div class="header-section">
+  <div class="flex-between">
+    <h2>Histórico de Alertas</h2>
+  </div>
+  <p class="text-muted">Todas as promoções que o radar interceptou para você.</p>
+</div>
+
+<div class="filters mt-4">
+  <div class="filter-group">
+    <label for="produtoFiltro">Produto:</label>
+    <select id="produtoFiltro" [(ngModel)]="produtoSelecionado" (change)="carregar()">
+      <option value="Tudo">Todos da Wishlist</option>
+      <option *ngFor="let prod of produtosWishlist()" [value]="prod.nome">{{ prod.nome }}</option>
+    </select>
+  </div>
+  
+  <div class="filter-group">
+    <label for="diasFiltro">Período:</label>
+    <select id="diasFiltro" [(ngModel)]="diasSelecionados" (change)="carregar()">
+      <option [ngValue]="7">Últimos 7 dias</option>
+      <option [ngValue]="15">Últimos 15 dias</option>
+      <option [ngValue]="30">Últimos 30 dias</option>
+    </select>
+  </div>
+</div>
+
+<div class="notif-container mt-4">
+  <div *ngIf="notificacoes().length === 0" class="empty-state">
+    Ainda não encontramos nenhuma promoção pra você.
+  </div>
+  
+  <div class="notif-card" *ngFor="let notif of notificacoes()" [class.unread]="!notif.foiLida">
+    <ng-container *ngIf="idEmExclusao() !== notif.id">
+      <div class="notif-content">
+        <div class="badges">
+          <span class="badge new" *ngIf="!notif.foiLida">Novo</span>
+          <span class="badge profile">&#64;{{ notif.handlePerfil }}</span>
+        </div>
+        <h3 class="title mt-2">{{ notif.titulo }}</h3>
+        <p class="body mt-2">{{ notif.conteudo }}</p>
+        <div class="notif-footer mt-2">
+          <span class="time">{{ notif.postadoEm | date:'dd/MM/yyyy HH:mm' }}</span>
+          <div class="actions">
+             <a [href]="notif.urlTweet" target="_blank" class="link-out mr-3">Ver Original ↗</a>
+             <button *ngIf="!notif.foiLida" class="btn-text" (click)="marcarLida(notif.id)">Marcar como lida ✓</button>
+             <button class="btn-text danger" style="color:#ff4d4d; margin-left: 12px; background:transparent; border:none; cursor:pointer;" (click)="iniciarExclusao(notif.id)">Excluir 🗑️</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="idEmExclusao() === notif.id">
+      <div class="notif-content" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 2rem;">
+        <p class="text-muted mb-3">Excluir permanentemente este alerta do histórico?</p>
+        <div class="confirm-actions" style="display: flex; gap: 1rem;">
+          <button class="btn-cancel" style="background:transparent; border:1px solid #666; color:#ccc; cursor:pointer; padding:6px 16px; border-radius:4px;" (click)="cancelarExclusao()">Cancelar</button>
+          <button class="btn-confirm-danger" style="background:#ff4d4d; border:none; color:white; cursor:pointer; padding:6px 16px; border-radius:4px;" (click)="confirmarExclusao(notif.id)">Sim, Excluir</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

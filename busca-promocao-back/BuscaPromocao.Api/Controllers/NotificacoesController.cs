@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using BuscaPromocao.Application.Features.Notificacoes.Commands.MarcarComoLida;
+using BuscaPromocao.Application.Features.Notificacoes.Commands.RemoverNotificacao;
 using BuscaPromocao.Application.Features.Notificacoes.Queries.ObterNotificacoesNaoLidas;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -33,11 +34,11 @@ public sealed class NotificacoesController : ControllerBase
     }
 
     [HttpGet("nao-lidas")]
-    public async Task<IActionResult> ObterNaoLidas(CancellationToken cancellationToken)
+    public async Task<IActionResult> ObterNaoLidas([FromQuery] int? dias, [FromQuery] string? produto, CancellationToken cancellationToken)
     {
         try
         {
-            var query = new ObterNotificacoesNaoLidasQuery(LerUsuarioAutenticado());
+            var query = new ObterNotificacoesNaoLidasQuery(LerUsuarioAutenticado(), dias, produto);
             var resultado = await _mediator.Send(query, cancellationToken);
             return Ok(resultado);
         }
@@ -54,6 +55,21 @@ public sealed class NotificacoesController : ControllerBase
         {
             // Em um sistema real o Handler também validaria se a notificação pertence ao UsuarioId
             var command = new MarcarComoLidaCommand(id);
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Erro = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> RemoverNotificacao(Guid id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var command = new RemoverNotificacaoCommand(id, LerUsuarioAutenticado());
             await _mediator.Send(command, cancellationToken);
             return NoContent();
         }
