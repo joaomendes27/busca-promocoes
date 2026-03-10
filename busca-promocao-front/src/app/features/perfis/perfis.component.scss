@@ -1,5 +1,11 @@
-.mt-4 { margin-top: 2rem; }
-.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.mt-4 {
+  margin-top: 2rem;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .adder-box {
   background: var(--color-surface);
@@ -37,24 +43,26 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
 }
 
-.w-full { grid-column: 1 / -1; }
+.w-full {
+  grid-column: 1 / -1;
+}
 
 .empty-state {
   padding: 3rem;
   text-align: center;
   border: 1px dashed var(--color-border);
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .profile-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem 1.75rem;
 }
 
 .profile-info {
@@ -64,23 +72,67 @@
 
 .handle {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-text-main);
 }
 
 .date {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .btn-icon {
   color: var(--color-danger);
-  font-size: 1.2rem;
-  padding: 0.5rem;
+  font-size: 1.4rem;
+  padding: 0.6rem;
   border-radius: 50%;
   transition: background 0.2s;
 }
 
 .btn-icon:hover {
   background: rgba(255, 58, 58, 0.1);
+}
+
+.confirm-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+
+  .item-name {
+    font-size: 1.1rem;
+  }
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid #666;
+  color: #ccc;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.btn-confirm-danger {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.erro-msg {
+  color: #ff4d4d;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
 }

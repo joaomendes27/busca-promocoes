@@ -70,8 +70,13 @@ docker-compose.override.yml
 .agents/
 .agent/
 .gemini/
-nitter.conf
 skills-lock.json
+
+# Nitter / Twitter session (dados sensíveis - nunca comitar)
+nitter.conf
+sessions.jsonl
+generate_sessions*.js
+generate_sessions*.ps1
 
 # Misc
 *.bak

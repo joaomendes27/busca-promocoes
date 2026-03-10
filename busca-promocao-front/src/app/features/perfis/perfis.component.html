@@ -2,40 +2,73 @@
   <div class="flex-between">
     <h2>Perfis Monitorados</h2>
   </div>
-  <p class="text-muted">Adicione &#64;handles do X (Twitter) para o radar rastrear.</p>
+  <p class="text-muted">
+    Adicione &#64;handles do X (Twitter) para o radar rastrear.
+  </p>
 </div>
 
 <div class="adder-box mt-4">
   <form (ngSubmit)="adicionarPerfil()" #form="ngForm" class="flex-row">
     <div class="input-wrap">
       <span class="prefix">&#64;</span>
-      <input type="text" name="handle" [(ngModel)]="novoHandle" required placeholder="ex: promocoes_br">
+      <input
+        type="text"
+        name="handle"
+        [(ngModel)]="novoHandle"
+        required
+        placeholder="ex: promocoes_br"
+        [disabled]="adicionando()"
+      />
     </div>
-    <button class="btn-primary" type="submit" [disabled]="!novoHandle">ADICIONAR</button>
+    <button
+      class="btn-primary"
+      type="submit"
+      [disabled]="!novoHandle || adicionando()"
+    >
+      {{ adicionando() ? "VERIFICANDO..." : "ADICIONAR" }}
+    </button>
   </form>
+  <p class="erro-msg" *ngIf="erro()">{{ erro() }}</p>
 </div>
 
 <div class="grid mt-4">
   <div *ngIf="perfis().length === 0" class="empty-state w-full">
     Nenhum perfil cadastrado ainda.
   </div>
-  
+
   <div class="card profile-card" *ngFor="let perfil of perfis()">
     <ng-container *ngIf="idEmExclusao() !== perfil.id">
       <div class="profile-info">
         <span class="handle">&#64;{{ perfil.handlePerfil }}</span>
-        <span class="date text-muted" *ngIf="perfil.criadoEm">Aberto em {{ perfil.criadoEm | date:'dd/MM/yyyy' }}</span>
+        <span class="date text-muted" *ngIf="perfil.criadoEm"
+          >Aberto em {{ perfil.criadoEm | date: "dd/MM/yyyy" }}</span
+        >
       </div>
-      <button class="btn-icon" (click)="iniciarExclusao(perfil.id)" title="Remover">✕</button>
+      <button
+        class="btn-icon"
+        (click)="iniciarExclusao(perfil.id)"
+        title="Remover"
+      >
+        ✕
+      </button>
     </ng-container>
 
     <ng-container *ngIf="idEmExclusao() === perfil.id">
-      <div class="item-info" style="flex:1;">
-        <span class="item-name text-muted">Excluir &#64;{{ perfil.handlePerfil }}?</span>
-      </div>
-      <div class="confirm-actions" style="display: flex; gap: 0.5rem; align-items: center; justify-content: flex-end;">
-        <button class="btn-cancel" style="background:transparent; border:1px solid #666; color:#ccc; cursor:pointer; padding:4px 8px; border-radius:4px;" (click)="cancelarExclusao()">Cancelar</button>
-        <button class="btn-confirm-danger" style="background:#ff4d4d; border:none; color:white; cursor:pointer; padding:4px 8px; border-radius:4px;" (click)="confirmarExclusao(perfil.id)">Sim, Excluir</button>
+      <div class="confirm-content">
+        <span class="item-name text-muted"
+          >Excluir &#64;{{ perfil.handlePerfil }}?</span
+        >
+        <div class="confirm-actions">
+          <button class="btn-cancel" (click)="cancelarExclusao()">
+            Cancelar
+          </button>
+          <button
+            class="btn-confirm-danger"
+            (click)="confirmarExclusao(perfil.id)"
+          >
+            Sim, Excluir
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>

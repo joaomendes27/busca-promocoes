@@ -41,8 +41,7 @@ services:
       - "8080:8080"
     volumes:
       - ./nitter.conf:/src/nitter.conf:ro
-    tmpfs:
-      - /src/sessions
+      - ./sessions.jsonl:/src/sessions.jsonl:ro
     restart: unless-stopped
 
   # --- BACKEND SERVICES ---

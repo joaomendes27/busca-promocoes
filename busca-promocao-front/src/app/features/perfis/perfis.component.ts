@@ -8,27 +8,40 @@ import { PerfilService, Perfil } from '../../core/services/perfil.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './perfis.component.html',
-  styleUrl: './perfis.component.scss'
+  styleUrl: './perfis.component.scss',
 })
 export class PerfisComponent implements OnInit {
   service = inject(PerfilService);
   perfis = signal<Perfil[]>([]);
   idEmExclusao = signal<string | null>(null);
   novoHandle = '';
+  adicionando = signal(false);
+  erro = signal<string | null>(null);
 
   ngOnInit() {
     this.carregar();
   }
 
   carregar() {
-    this.service.obterTodos().subscribe(res => this.perfis.set(res || []));
+    this.service.obterTodos().subscribe((res) => this.perfis.set(res || []));
   }
 
   adicionarPerfil() {
     if (!this.novoHandle) return;
-    this.service.adicionar(this.novoHandle).subscribe(() => {
-      this.novoHandle = '';
-      this.carregar();
+    this.adicionando.set(true);
+    this.erro.set(null);
+    this.service.adicionar(this.novoHandle).subscribe({
+      next: () => {
+        this.novoHandle = '';
+        this.adicionando.set(false);
+        this.carregar();
+      },
+      error: (err) => {
+        this.adicionando.set(false);
+        const msg =
+          err?.error?.Erro || err?.error?.erro || 'Erro ao adicionar perfil.';
+        this.erro.set(msg);
+      },
     });
   }
 

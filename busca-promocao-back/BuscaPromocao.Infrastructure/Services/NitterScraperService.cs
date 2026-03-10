@@ -98,4 +98,28 @@ public sealed class NitterScraperService : IScraperService
 
         return promocoesEncontradas.OrderByDescending(p => p.DataPublicacao);
     }
+
+    public async Task<bool> PerfilExisteAsync(string handle, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var url = $"{_nitterBaseUrl}/{Uri.EscapeDataString(handle)}/rss";
+            var response = await _httpClient.GetAsync(url, cancellationToken);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogWarning("Perfil @{Handle} não encontrado no Nitter. Status: {Status}", handle, response.StatusCode);
+                return false;
+            }
+
+            var content = await response.Content.ReadAsStringAsync(cancellationToken);
+            var doc = XDocument.Parse(content);
+            return doc.Descendants("channel").Any();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Erro ao verificar existência do perfil @{Handle} no Nitter.", handle);
+            return false;
+        }
+    }
 }

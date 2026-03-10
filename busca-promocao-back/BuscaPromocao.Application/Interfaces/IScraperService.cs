@@ -13,4 +13,6 @@ public interface IScraperService
         IEnumerable<string> palavrasChave, 
         int diasAtras, 
         CancellationToken cancellationToken);
+
+    Task<bool> PerfilExisteAsync(string handle, CancellationToken cancellationToken);
 }
