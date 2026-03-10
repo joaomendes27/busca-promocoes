@@ -41,6 +41,8 @@ services:
       - "8080:8080"
     volumes:
       - ./nitter.conf:/src/nitter.conf:ro
+    tmpfs:
+      - /src/sessions
     restart: unless-stopped
 
   # --- BACKEND SERVICES ---
@@ -54,10 +56,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Include Error Detail=true
+      - Nitter__BaseUrl=http://nitter:8080
     depends_on:
       - postgres
       - redis
       - rabbitmq
+      - nitter
     restart: unless-stopped
 
   crawler:

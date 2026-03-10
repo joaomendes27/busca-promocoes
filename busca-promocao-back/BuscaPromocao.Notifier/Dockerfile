@@ -21,6 +21,10 @@ RUN dotnet publish "BuscaPromocao.Notifier.csproj" -c Release -o /app/publish /p
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS runtime
 WORKDIR /app
 
+# Instalar ICU libs para suportar globalização
+RUN apk add --no-cache icu-libs icu-data-full
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 

@@ -26,6 +26,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine AS runtime
 WORKDIR /app
 EXPOSE 8080
 
+# Instalar ICU libs para suportar globalização
+RUN apk add --no-cache icu-libs icu-data-full
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 # Adicionar usuário não-root por segurança
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
