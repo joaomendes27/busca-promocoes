@@ -35,11 +35,21 @@
   border-left: 3px solid var(--color-accent);
   padding: 1.5rem;
   border-radius: 4px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, opacity 0.3s;
 }
 
 .feed-item:hover {
   transform: translateX(5px);
+}
+
+.feed-item.lida {
+  border-left-color: var(--color-border);
+  opacity: 0.5;
+}
+
+.feed-item.lida h4,
+.feed-item.lida p {
+  color: var(--color-text-muted);
 }
 
 .feed-header {
@@ -63,9 +73,27 @@
   color: var(--color-text-muted);
 }
 
-.link-out {
+.link-out,
+.link-out:visited {
   display: inline-block;
   margin-top: 1rem;
   font-weight: bold;
   font-size: 0.9rem;
+  color: var(--color-accent);
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+  margin-left: auto;
+}
+
+.btn-delete:hover {
+  color: var(--color-danger);
 }

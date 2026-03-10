@@ -75,6 +75,7 @@ services:
       - MessageBroker__Password=${RABBITMQ_PASSWORD}
       - Redis__ConnectionString=redis:6379
       - Nitter__BaseUrl=http://nitter:8080
+      - Crawler__IntervaloMinutos=1
     depends_on:
       - postgres
       - rabbitmq

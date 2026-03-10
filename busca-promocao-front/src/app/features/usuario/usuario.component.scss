@@ -1,0 +1,96 @@
+.mt-4 { margin-top: 2rem; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.settings-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.user-current {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.label-muted {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+}
+
+.current-value {
+  font-size: 0.95rem;
+  color: var(--color-accent);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: var(--color-danger);
+}
+
+.w-100 {
+  width: 100%;
+  padding: 0.875rem;
+  margin-top: auto;
+}
+
+.feedback {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 2px;
+}
+
+.error-msg {
+  color: var(--color-danger);
+  background: rgba(255, 58, 58, 0.1);
+  border-left: 2px solid var(--color-danger);
+}
+
+.success-msg {
+  color: var(--color-accent);
+  background: rgba(205, 250, 76, 0.08);
+  border-left: 2px solid var(--color-accent);
+}

@@ -6,8 +6,7 @@
 <div class="dashboard-grid mt-4">
   <div class="card stat-card">
     <h3>Alertas Não Lidos</h3>
-    <div class="stat-value text-danger" *ngIf="notificacoes()">{{ notificacoes().length }}</div>
-    <div class="stat-value" *ngIf="!notificacoes()">0</div>
+    <div class="stat-value text-danger">{{ naoLidasCount() }}</div>
   </div>
 
   <div class="card stat-card">
@@ -21,7 +20,7 @@
   </div>
 
   <div class="card stat-card">
-    <h3>Promoções encontradas no último mês</h3>
+    <h3>Promoções encontradas no mês atual</h3>
     <div class="stat-value text-accent">{{ totalPromocoes() }}</div>
   </div>
 </div>
@@ -31,16 +30,36 @@
   <div *ngIf="!notificacoes()?.length" class="empty-state">
     <p>Nenhuma promoção nova encontrada.</p>
   </div>
-  
+
   <div class="feed mt-2" *ngIf="notificacoes()?.length">
-    <div class="feed-item" *ngFor="let notif of notificacoes() | slice:0:5">
+    <div
+      class="feed-item"
+      [class.lida]="notif.foiLida"
+      *ngFor="let notif of notificacoes() | slice: 0 : 5"
+    >
       <div class="feed-header">
         <span class="badge new" *ngIf="!notif.foiLida">Novo</span>
-        <span class="time">{{ notif.postadoEm | date:'short' }}</span>
+        <span class="time">{{
+          notif.postadoEm | date: "dd/MM/yyyy HH:mm"
+        }}</span>
+        <button
+          class="btn-delete"
+          (click)="removerAlerta(notif.id)"
+          title="Remover"
+        >
+          ✕
+        </button>
       </div>
       <h4>{{ notif.titulo }}</h4>
       <p class="text-muted">{{ notif.conteudo }}</p>
-      <a [href]="notif.urlTweet" target="_blank" class="link-out">Ver Tweet ↗</a>
+      <a
+        [href]="notif.urlTweet"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link-out"
+        (click)="marcarComoLido(notif)"
+        >Ver Tweet ↗</a
+      >
     </div>
   </div>
 </div>

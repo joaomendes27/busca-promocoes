@@ -10,7 +10,8 @@
       </div>
       <div class="form-group">
         <label>E-mail</label>
-        <input type="email" name="email" [(ngModel)]="dados.email" required placeholder="seu&#64;email.com">
+        <input type="email" name="email" [(ngModel)]="dados.email" required email #emailField="ngModel" placeholder="seu&#64;email.com">
+        <span class="error-msg" *ngIf="emailField.invalid && emailField.touched">Informe um e-mail válido.</span>
       </div>
       <div class="form-group">
         <label>Senha</label>

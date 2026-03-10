@@ -4,13 +4,10 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface Promocao {
-  id: string;
-  nomeProduto: string;
-  urlReferencia: string;
-  tituloContexto: string;
-  perfilOrigem: string;
-  precoEncontrado: number | null;
-  encontradaEm: string;
+  perfil: string;
+  texto: string;
+  urlTweet: string;
+  dataPublicacao: string;
 }
 
 @Injectable({

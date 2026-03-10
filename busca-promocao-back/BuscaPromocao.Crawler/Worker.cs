@@ -150,14 +150,15 @@ public sealed class CrawlerWorker : BackgroundService
                             "Promoção encontrada! Perfil: {Handle}, Produto: {Produto}, Tweet: {Link}",
                             handle, produto.Nome, link);
 
-                        await _publishEndpoint.Publish(new PromocaoEncontradaEvento(
-                            UsuarioId: usuarioId,
-                            HandlePerfil: handle,
-                            Produto: produto.Nome,
-                            TextoTweet: titulo,
-                            UrlTweet: link,
-                            PostadoEm: pubDate.ToUniversalTime()
-                        ), cancellationToken);
+                        await _publishEndpoint.Publish(new PromocaoEncontradaEvento
+                        {
+                            UsuarioId = usuarioId,
+                            HandlePerfil = handle,
+                            Produto = produto.Nome,
+                            TextoTweet = titulo,
+                            UrlTweet = link,
+                            PostadoEm = pubDate.ToUniversalTime()
+                        }, cancellationToken);
                     }
                 }
             }

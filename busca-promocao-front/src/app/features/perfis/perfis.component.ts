@@ -30,7 +30,8 @@ export class PerfisComponent implements OnInit {
     if (!this.novoHandle) return;
     this.adicionando.set(true);
     this.erro.set(null);
-    this.service.adicionar(this.novoHandle).subscribe({
+    const handle = this.novoHandle.replace(/^@+/, '').trim();
+    this.service.adicionar(handle).subscribe({
       next: () => {
         this.novoHandle = '';
         this.adicionando.set(false);

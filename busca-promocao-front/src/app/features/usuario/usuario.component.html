@@ -1,0 +1,101 @@
+<div class="header-section">
+  <h2>Minha Conta</h2>
+  <p class="text-muted">Gerencie suas credenciais de acesso.</p>
+</div>
+
+<div class="cards-grid mt-4">
+
+  <!-- Alterar E-mail -->
+  <div class="settings-card">
+    <h3 class="card-title">Alterar E-mail</h3>
+
+    <div class="user-current" *ngIf="authService.currentUser() as user">
+      <span class="label-muted">E-mail atual:</span>
+      <span class="current-value">{{ user.email }}</span>
+    </div>
+
+    <form (ngSubmit)="atualizarEmail()" #emailForm="ngForm">
+      <div class="form-group">
+        <label>Novo E-mail</label>
+        <input
+          type="email"
+          name="novoEmail"
+          [(ngModel)]="dadosEmail.novoEmail"
+          required
+          email
+          #novoEmailField="ngModel"
+          placeholder="novo@email.com">
+        <span class="field-error" *ngIf="novoEmailField.invalid && novoEmailField.touched">
+          Informe um e-mail válido.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Senha Atual</label>
+        <input
+          type="password"
+          name="senhaAtualEmail"
+          [(ngModel)]="dadosEmail.senhaAtual"
+          required
+          placeholder="••••••••">
+      </div>
+
+      <div class="feedback error-msg" *ngIf="erroEmail()">{{ erroEmail() }}</div>
+      <div class="feedback success-msg" *ngIf="sucessoEmail()">{{ sucessoEmail() }}</div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="emailForm.invalid || loadingEmail()">
+        {{ loadingEmail() ? 'Salvando...' : 'Atualizar E-mail' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Alterar Senha -->
+  <div class="settings-card">
+    <h3 class="card-title">Alterar Senha</h3>
+
+    <form (ngSubmit)="atualizarSenha()" #senhaForm="ngForm">
+      <div class="form-group">
+        <label>Senha Atual</label>
+        <input
+          type="password"
+          name="senhaAtual"
+          [(ngModel)]="dadosSenha.senhaAtual"
+          required
+          placeholder="••••••••">
+      </div>
+
+      <div class="form-group">
+        <label>Nova Senha</label>
+        <input
+          type="password"
+          name="novaSenha"
+          [(ngModel)]="dadosSenha.novaSenha"
+          required
+          minlength="6"
+          #novaSenhaField="ngModel"
+          placeholder="••••••••">
+        <span class="field-error" *ngIf="novaSenhaField.invalid && novaSenhaField.touched">
+          A senha deve ter pelo menos 6 caracteres.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Confirmar Nova Senha</label>
+        <input
+          type="password"
+          name="confirmarNovaSenha"
+          [(ngModel)]="dadosSenha.confirmarNovaSenha"
+          required
+          placeholder="••••••••">
+      </div>
+
+      <div class="feedback error-msg" *ngIf="erroSenha()">{{ erroSenha() }}</div>
+      <div class="feedback success-msg" *ngIf="sucessoSenha()">{{ sucessoSenha() }}</div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="senhaForm.invalid || loadingSenha()">
+        {{ loadingSenha() ? 'Salvando...' : 'Atualizar Senha' }}
+      </button>
+    </form>
+  </div>
+
+</div>
