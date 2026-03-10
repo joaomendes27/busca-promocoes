@@ -143,30 +143,4 @@ busca-promocoes/
 
 ---
 
-## Fluxo de dados detalhado
 
-```
-[Angular Frontend]
-      │  HTTP + JWT
-      ▼
-[API .NET 9]  ←──────────────────────────────────┐
-      │  EF Core                                   │
-      ▼                                            │
-[PostgreSQL]                                       │
-  usuarios, produtos,                              │
-  perfis, notificacoes                             │
-                                                   │
-[Crawler] → a cada 1 min                          │
-  1. Lê perfis e wishlist do PostgreSQL            │
-  2. Fetch RSS: GET http://nitter:8080/{handle}/rss│
-  3. Verifica cada tweet no Redis (deduplicação)   │
-  4. Se novo e relevante → publica no RabbitMQ     │
-                                                   │
-[RabbitMQ] → fila de eventos                      │
-      │                                            │
-      ▼                                            │
-[Notifier]                                         │
-  1. Consome evento PromocaoEncontradaEvento        │
-  2. Salva Notificacao no PostgreSQL ──────────────┘
-  3. Envia e-mail HTML via Gmail SMTP (MailKit)
-```
