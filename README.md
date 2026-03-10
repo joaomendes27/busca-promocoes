@@ -9,7 +9,7 @@ Sistema automatizado de monitoramento de promoções no X (Twitter). Você cadas
 ```
 Usuário cadastra perfis (@handle) e produtos (ex: "Controle PS4")
         ↓
-Crawler acorda a cada minuto e lê os feeds via Nitter (RSS)
+Crawler acorda a cada x minutos e lê os feeds via Nitter (RSS)
         ↓
 Encontrou tweet com palavra-chave? Verifica no Redis se já foi processado
         ↓
