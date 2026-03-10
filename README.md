@@ -1,6 +1,6 @@
 # Busca Promoção
 
-Sistema automatizado de monitoramento de promoções no X (Twitter). Você cadastra perfis e produtos — o sistema rastreia os feeds, detecta promoções e te notifica por e-mail em tempo real.
+Sistema automatizado de monitoramento de promoções no X (Twitter). Você cadastra perfis e produtos — o sistema rastreia os feeds, detecta promoções e te notifica por e-mail e pela aplicação em tempo real.
 
 ---
 
@@ -32,15 +32,6 @@ O projeto é composto por **4 microsserviços** independentes:
 | **Crawler** | .NET 9 Worker Service | Scraping dos feeds do X/Twitter via Nitter, deduplicação via Redis |
 | **Notifier** | .NET 9 Worker Service | Consome fila do RabbitMQ, salva notificação e envia e-mail |
 | **Frontend** | Angular 17 + Nginx | Interface web SPA servida pelo Nginx |
-
-**Infraestrutura de suporte:**
-
-| Serviço | Porta | Finalidade |
-| :--- | :--- | :--- |
-| PostgreSQL | 5432 | Banco de dados principal |
-| Redis | 6379 | Cache de deduplicação de tweets (TTL 7 dias) |
-| RabbitMQ | 5672 / 15672 | Message broker entre Crawler e Notifier |
-| Nitter | 8080 | Proxy open-source do Twitter/X (expõe feeds RSS) |
 
 **Stack de backend:**
 - Clean Architecture (Domain → Application → Infrastructure → API)
