@@ -24,6 +24,8 @@ Dashboard exibe os alertas em tempo real
 
 ## Arquitetura
 
+![Diagrama de arquitetura](busca-promocao-front/src/assets/Diagrama.png)
+
 O projeto é composto por **4 microsserviços** independentes:
 
 | Serviço | Tecnologia | Responsabilidade |
