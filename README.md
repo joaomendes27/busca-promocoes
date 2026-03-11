@@ -1,6 +1,6 @@
 # Busca Promoção
 
-Sistema automatizado de monitoramento de promoções no X (Twitter). Você cadastra perfis e produtos — o sistema rastreia os feeds, detecta promoções e te notifica por e-mail e pela aplicação em tempo real.
+Sistema automatizado de monitoramento de promoções no X (Twitter). Você cadastra perfis e produtos — o sistema rastreia os feeds, detecta promoções e te notifica por e-mail e pela aplicação em tempo real. Também é possível disparar uma busca imediata: o sistema varre os posts já publicados pelos perfis monitorados e retorna os que contêm seu produto em promoção.
 
 ---
 
